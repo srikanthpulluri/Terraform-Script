@@ -1,0 +1,51 @@
+Start by adding Terraform to the .gitignore file:
+
+npx gitignore terraform
+
+Next define a Terraform configuration in terraform.tf:
+
+terraform {
+  required_version = "~> 0.13"
+}
+
+
+Next define the Terraform module in web-app.tf:
+
+
+module "web-app" {
+  source  = "wurde/web-app/aws"
+  version = "1.3.0"
+
+  dist_dir      = "./dist"
+  domain        = "Srikanth.com"
+  alias_domains = ["www.Srikanth.com"]
+}
+
+
+Next initialize the Terraform working directory:
+
+terraform init
+
+Next run the plan and apply commands.
+
+terraform plan    #=> generates an execution plan.
+terraform apply   #=> builds infrastructure on AWS.
+
+Finally verify domain ownership between AWS and the domain name provider. Route53 generates custom DNS name servers to set within the domain name provider. Example name servers provided via Route53:
+
+
+
+
+
+terraform {
+  required_version = "~> 0.13"
+}
+
+module "web-app" {
+  source  = "wurde/web-app/aws"
+  version = "1.3.0"
+
+  dist_dir      = "./dist"
+  domain        = "Srikanth.com"
+  alias_domains = ["www.Srikanth.com"]
+}
